@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+	<style type="text/css">
+        body {
+              background-color: grey;
+              color: black;
+          }
+   
+        
+        h1 {
+          font-size: 100;
+          font-weight: 900;
+          font-family: 'arial';
+          text-align: center;
+        }
+        h3 {
+          font-size: 90;
+          font-weight: 700;
+          font-family: 'arial';
+          text-align: center;
+        }
+        h5 {
+        	color:black;
+          font-size: 100;
+          font-weight: 700;
+          font-family: 'arial';
+          text-align: center;
+        }
+
+        }
+    </style>
+	<style>
+	html, body, #map-canvas{height:80%; width:80%; margin:0; padding:0;}
+	</style>
+	<script type="text/javascript"
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAp96OKtIyt_jMsGCBgTW70rMoXSbsrxEs">
+	</script>
+	  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+	  <script language="javascript" src="libraries/p5.dom.js"></script>
+
+
+
+	<script>
+
+
+		var a =48.866667;
+		var b = 2.333333;
+
+
+		var submit;
+
+		function initialize(){
+		var mapOptions = {
+			zoom:8,
+			center: new google.maps.LatLng(a,b)
+		};
+
+		var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+		
+		}
+
+		function loadScript(){
+		var script = document.createElement('script');
+		script.type = 'text/javascript';
+		script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&'+'callback=initialize';
+		document.body.appendChild(script);
+	}
+
+function setup(){
+
+		var lname= select('#lname');
+		var pname= select('#pname');
+		var submit = select('#submit');
+		a = lname.value();
+		b = pname.value();
+
+		submit.MousePressed(Definir(lname,pname));
+}
+	
+
+window.onload = loadScript;
+	function Definir(l,p){
+
+		var mapOptions = {
+			zoom:8,
+			center: new google.maps.LatLng(l,p)
+		};
+
+		var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+		console.log("appelle Definir");
+		
+		//window.onload = loadScript;
+
+	}
+	</script>
+
+</head>
+<body>
+	<h1>Entrez les Coordonnees de votre ville </h1>
+	<h3>Entrez la lattitude et la longitude de votre ville dans les zones de texte puis appuyez sur le premier bouton pour lancer la recherche puis sur le deuxieme pour rafraichir la page et ainsi afficher le lieu voulu </h3>
+	<h5>Attention vos coordonnees doivent etre dans le bon intervale de valeurs pour etre valables ! <br> Voici quelques exemples de villes pour eviter ce probleme: <br> <br> Paris lat: 48.866667 long: 2.333333 <br>New york lat: 40.7808 long: -73.9772<br>Dakar lat: 14.6937 long: -17.444</h5>
+
+	<div id ="map-canvas" heigt="100%" width="100%">
+	</div>
+	<button type="button" onClick = Definir() id = "submit"> Chercher un emplacement </button><br>
+	<INPUT TYPE="button" onClick="history.go(0)" VALUE="Refresh">
+	<p>Latitude
+	<input type="text" id="lname" ><br>
+	<p>Longitude
+	<input type="text" id="pname"><br>
+</body>
+</html>
